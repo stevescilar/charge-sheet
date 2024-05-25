@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hour;
+use Carbon\Carbon;
 
 class HourController extends Controller
 {
@@ -12,11 +13,18 @@ class HourController extends Controller
     public function index()
     {
         $hours = Hour::all();
-        $dailyEarnings = $hours->sum('earnings');
+        // $dailyEarnings = round($hours->sum('earnings'),0);
+        // group by day and round them 
+        $dailyEarnings = $hours->groupBy(function($date){
+            return Carbon::parse($date->date)->format('Y-m-d');
+        })->map(function($day){
+            return round($day->sum('earnings'),0);
+        });
+        
         $monthlyEarnings = $hours->groupBy(function($date){
-            return \Carbon\Carbon::parse($date->date)->format('Y-m');
+                return Carbon::parse($date->date)->format('F Y');
         })->map(function($month){
-            return $month->sum('earnings');
+            return round($month->sum('earnings'),0);
         });
 
         return view('hours.index', compact('hours','dailyEarnings','monthlyEarnings'));
@@ -30,12 +38,13 @@ class HourController extends Controller
     // store the hours
     public function store(Request $request){
         $request->validate([
-            'date' => 'required|date',
+            'date' => 'required|date|unique:hours,date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
 
     Hour::create($request->all());
+
     return redirect()->route('hours.index')->with('success', 'Hour added successfully');
     }
 }

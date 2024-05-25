@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hours', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->date('date')->unique();
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();

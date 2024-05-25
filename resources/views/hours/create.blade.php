@@ -20,5 +20,7 @@
         <br>
         <button type="submit"> Submit</button>
     </form>
+
+    <a href="{{ route('hours.index') }}">Back to Home</a>
 </body>
 </html>

@@ -8,17 +8,25 @@
 <body>
     <h1>Contract Tracker</h1>
     <a href="{{ route('hours.create')}}">Add New Entry</a>
-    <h2>Daily Earnings: ${{ $dailyEarnings }} </h2>
+    <h2>Total Earning</h2>
+    <br>
+    {{-- <ul>
+        @foreach($dailyEarnings as $day => $earnings)
+        <li>{{ $day }} : Ksh. {{ $earnings }} </li>
+        @endforeach
+    </ul> --}}
+    
     <h2>Monthly Earnings: </h2>
     <ul>
         @foreach($monthlyEarnings as $month => $earnings)
-            <li>{{ $month }}: ${{ $earnings }}</li>
+            <li>{{ $month }}: Ksh. {{ $earnings }}</li>
         @endforeach
 
     </ul>
     <table>
         <thead>
             <tr>
+                <th>Day</th>
                 <th>Date</th>
                 <th>Start Time</th>
                 <th>End Time</th>
@@ -31,11 +39,12 @@
         <tbody>
             @foreach ($hours  as $hour )
             <tr>
+                <td>{{ \Carbon\Carbon::parse($hour->date)->format('l') }}</td>
                 <td>{{ $hour->date}}</td>
                 <td>{{ $hour->start_time}}</td>
                 <td>{{ $hour->end_time}}</td>
-                <td>{{ $hour->hours}}</td>
-                <td>{{ $hour->earnings}}</td>
+                <td>{{ number_format($hour->hours,2)}}</td>
+                <td>{{ number_format($hour->earnings, 0)}}</td>
             </tr>
                 
             @endforeach

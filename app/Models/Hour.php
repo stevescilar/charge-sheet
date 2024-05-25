@@ -12,14 +12,17 @@ class Hour extends Model
     protected $fillable = ['date', 'start_time','end_time'];
 
     // get hours for the day
-    public function getHourAttribute()
+    public function getHoursAttribute()
     {
-        return(strtotime($this->end_time) - strtotime($this->start_time)) / 3600;
-
+       $startTime = strtotime($this->start_time);
+       $endTime = strtotime($this->end_time);
+       $hours_worked = ($endTime - $startTime) / 3600; 
+       
+       return max($hours_worked - 1, 0);
     }
 
     // calculate earnings per hours worked
-    public function getEarningAttribute()
+    public function getEarningsAttribute()
     {
         return $this->hours * 1000;
     }
