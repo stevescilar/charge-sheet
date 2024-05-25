@@ -38,7 +38,16 @@ class HourController extends Controller
     // store the hours
     public function store(Request $request){
         $request->validate([
-            'date' => 'required|date|unique:hours,date',
+            'date' => ['required', 'date', 'unique:hours,date', function ($attribute, $value, $fail) {
+                $date = Carbon::parse($value);
+                $dayOfWeek = $date->dayOfWeek;
+                if ($dayOfWeek == Carbon::SATURDAY || $dayOfWeek == Carbon::SUNDAY) {
+                $fail('Data entry is not allowed on Saturdays and Sundays.');
+                }
+                if ($date->isFuture()) {
+                $fail('Data entry for future dates is not allowed.');
+                }
+            }],
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
         ]);

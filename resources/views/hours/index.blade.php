@@ -13,17 +13,26 @@
         @endforeach
     </ul> --}}
     
-    <h2>Monthly Earnings: </h2>
-    <ul class="list-group mb-4">
-        @foreach($monthlyEarnings as $month => $earnings)
-            <li list-group-item d-flex justify-content-between align-items-center>{{ $month }}: Ksh. {{ $earnings }}</li>
-        @endforeach
 
-    </ul>
-
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+        Monthly Earnings
+        </div>
+        <ul class="list-group list-group-flush">
+            
+                @foreach($monthlyEarnings as $month => $earnings)
+                    <li list-group-item d-flex justify-content-between align-items-right>
+                        {{ $month }} <span> Ksh. {{ number_format($earnings, 0) }}</span>
+                    </li>
+                @endforeach
+            
+        </ul>
+    </div>
+    
+    
     <h3 class="mb-3"> Daily Earnings</h3>
     <table class="table table-striped">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">Day</th>
                 <th scope="col">Date</th>
@@ -42,10 +51,12 @@
                 <td>{{ $hour->start_time}}</td>
                 <td>{{ $hour->end_time}}</td>
                 <td>{{ number_format($hour->hours,2)}}</td>
-                <td>{{ number_format($hour->earnings, 0)}}</td>
+                <td> Ksh. {{ number_format($hour->earnings, 0)}}</td>
             </tr>
                 
             @endforeach
         </tbody>
     </table>
+
+    
 @endsection
