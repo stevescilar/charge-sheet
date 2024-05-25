@@ -6,13 +6,6 @@
 @section('content')
     <h1 class="mb-4"> Contract Tracker </h1>
     <a href="{{ route('hours.create')}}" class="btn btn-primary mb-3">Add New Entry</a>
-    
-    {{-- <ul>
-        @foreach($dailyEarnings as $day => $earnings)
-        <li>{{ $day }} : Ksh. {{ $earnings }} </li>
-        @endforeach
-    </ul> --}}
-    
 
     <div class="card" style="width: 18rem;">
         <div class="card-header">
