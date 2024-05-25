@@ -36,4 +36,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-## Time taken to code [![wakatime](https://wakatime.com/badge/user/563ecbb7-89c4-4563-82c1-258e14191d74/project/e528acbd-96b5-44a4-9ff4-83c2949ce413.svg)](https://wakatime.com/badge/user/563ecbb7-89c4-4563-82c1-258e14191d74/project/e528acbd-96b5-44a4-9ff4-83c2949ce413)
+## Code Sprint [![wakatime](https://wakatime.com/badge/user/563ecbb7-89c4-4563-82c1-258e14191d74/project/e528acbd-96b5-44a4-9ff4-83c2949ce413.svg)](https://wakatime.com/badge/user/563ecbb7-89c4-4563-82c1-258e14191d74/project/e528acbd-96b5-44a4-9ff4-83c2949ce413)
