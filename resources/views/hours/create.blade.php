@@ -14,7 +14,7 @@
             </ul>
         </div>
     @endif
-
+<div class="justify-center col-4">
     <form action="{{ route('hours.store') }}" method="POST">
         @csrf
         <div class="form-group">
@@ -36,6 +36,7 @@
             <a href="{{ route('hours.index') }}" class="btn btn-secondary">Back to Home</a>
         </div>
     </form>
+</div>
 @endsection
 
 @section('scripts')
