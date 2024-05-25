@@ -1,15 +1,12 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Contract Tracker</title>
-</head>
-<body>
-    <h1>Contract Tracker</h1>
-    <a href="{{ route('hours.create')}}">Add New Entry</a>
-    <h2>Total Earning</h2>
-    <br>
+@extends('layouts.app')
+
+
+@section('title', 'Contract Tracker')
+
+@section('content')
+    <h1 class="mb-4"> Contract Tracker </h1>
+    <a href="{{ route('hours.create')}}" class="btn btn-primary mb-3">Add New Entry</a>
+    
     {{-- <ul>
         @foreach($dailyEarnings as $day => $earnings)
         <li>{{ $day }} : Ksh. {{ $earnings }} </li>
@@ -17,22 +14,23 @@
     </ul> --}}
     
     <h2>Monthly Earnings: </h2>
-    <ul>
+    <ul class="list-group mb-4">
         @foreach($monthlyEarnings as $month => $earnings)
-            <li>{{ $month }}: Ksh. {{ $earnings }}</li>
+            <li list-group-item d-flex justify-content-between align-items-center>{{ $month }}: Ksh. {{ $earnings }}</li>
         @endforeach
 
     </ul>
-    <table>
+
+    <h3 class="mb-3"> Daily Earnings</h3>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Day</th>
-                <th>Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Hours</th>
-                <th>Earnings</th>
-                
+                <th scope="col">Day</th>
+                <th scope="col">Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Hours</th>
+                <th scope="col">Earnings</th>
             </tr>
 
         </thead>
@@ -50,5 +48,4 @@
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+@endsection

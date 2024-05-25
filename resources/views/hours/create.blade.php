@@ -1,12 +1,11 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add New Entry</title>
-</head>
-<body>
-    <h1>Add New Entry</h1>
+@extends('layouts.app')
+
+
+@section('title', 'Contract Tracker')
+
+@section('content')
+
+    <h1 class="mb-4">Add New Entry</h1>
     <form method="POST" action="{{ route('hours.store')}}">
         @csrf
         <label for="date">Date:</label>
@@ -22,5 +21,3 @@
     </form>
 
     <a href="{{ route('hours.index') }}">Back to Home</a>
-</body>
-</html>
