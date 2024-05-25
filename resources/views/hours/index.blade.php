@@ -41,7 +41,7 @@
     </div>
     
     
-    <h3 class="mb-3"> Daily Earnings</h3>
+    <h3 class=""> Daily Earnings</h3>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
