@@ -18,15 +18,26 @@
         <div class="card-header">
         Monthly Earnings
         </div>
-        <ul class="list-group list-group-flush">
-            
-                @foreach($monthlyEarnings as $month => $earnings)
-                    <li list-group-item d-flex justify-content-between align-items-right>
-                        {{ $month }} <span> Ksh. {{ number_format($earnings, 0) }}</span>
-                    </li>
-                @endforeach
-            
-        </ul>
+
+        <div class="card-body">
+            <table class="table table-dark table-striped">
+                <thead>
+                    
+                    <tr>
+                        <th>Month</th> 
+                        <th>Earnings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($monthlyEarnings as $month => $earnings)
+                    <tr>
+                        <td>{{ $month }}</td>
+                        <td>Ksh. {{ number_format($earnings, 0) }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
     
     
