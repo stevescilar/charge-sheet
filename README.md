@@ -1,4 +1,4 @@
-# CT-Pro(Charge Sheet Tracker)
+# CT-Pro (Charge Sheet Tracker)
 
 ## Abstract
 
