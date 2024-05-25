@@ -33,7 +33,7 @@ class HourController extends Controller
 
     // take in the dates(view/page)
     public function create(){
-        return view('hours.create');
+        return view('hours.createp');
     }
     // store the hours with restrictions to future dates
     public function store(Request $request){
