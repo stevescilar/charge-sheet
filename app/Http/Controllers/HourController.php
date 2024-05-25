@@ -35,7 +35,7 @@ class HourController extends Controller
     public function create(){
         return view('hours.create');
     }
-    // store the hours
+    // store the hours with restrictions to future dates
     public function store(Request $request){
         $request->validate([
             'date' => ['required', 'date', 'unique:hours,date', function ($attribute, $value, $fail) {
