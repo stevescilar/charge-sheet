@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="justify-center col-4 align-middle">
+    <div class="justify-center col-8">
         <div class="card">
             <div class="card-header">
                 Add New Entry
