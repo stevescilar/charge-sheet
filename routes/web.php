@@ -14,7 +14,7 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 // hour app routes
-Route::get('/hours', [HourController::class, 'index'])->name('hours.main');
+Route::get('/hours', [HourController::class, 'index'])->name('hours.index');
 Route::get('/hours/create', [HourController::class, 'create'])->name('hours.create');
 Route::post('/hours', [HourController::class, 'store'])->name('hours.store');
 

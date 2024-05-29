@@ -27,7 +27,7 @@ class HourController extends Controller
             return round($month->sum('earnings'),0);
         });
 
-        return view('hours.main', compact('hours','dailyEarnings','monthlyEarnings'));
+        return view('hours.index', compact('hours','dailyEarnings','monthlyEarnings'));
 
     }
 
@@ -51,9 +51,9 @@ class HourController extends Controller
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
+        
+    Hour::create([$request->all()]);
 
-    Hour::create($request->all());
-
-    return redirect()->route('hours.main')->with('success', 'Hour added successfully');
+    return redirect()->route('hours.index')->with('success', 'Hour added successfully');
     }
 }

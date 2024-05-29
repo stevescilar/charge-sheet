@@ -9,8 +9,9 @@ class Hour extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date', 'start_time','end_time'];
-
+    protected $fillable = [
+    'date', 'start_time', 'end_time'
+    ];
     // get hours for the day
     public function getHoursAttribute()
     {
@@ -25,5 +26,10 @@ class Hour extends Model
     public function getEarningsAttribute()
     {
         return $this->hours * 1000;
+    }
+
+    public function getTotalAmountAttribute()
+    {
+        return round($this->earnings * 1.16, 2);
     }
 }
