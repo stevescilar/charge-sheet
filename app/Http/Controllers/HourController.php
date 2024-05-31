@@ -52,7 +52,7 @@ class HourController extends Controller
             'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
         
-    Hour::create([$request->all()]);
+    Hour::create($request->only(['date', 'start_time', 'end_time','earnings']));
 
     return redirect()->route('hours.index')->with('success', 'Hour added successfully');
     }
