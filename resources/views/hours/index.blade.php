@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('title', 'Contract Tracker')
 
 @section('content')
@@ -9,15 +8,14 @@
 
     <div class="card" style="width: 18rem;">
         <div class="card-header">
-        Monthly Earnings
+            Monthly Earnings
         </div>
 
         <div class="card-body">
-            <table class="table table-dark table-striped">
+            <table id="monthlyEarningsTable" class="display nowrap" style="width:100%">
                 <thead>
-                    
                     <tr>
-                        <th>Month</th> 
+                        <th>Month</th>
                         <th>Earnings</th>
                     </tr>
                 </thead>
@@ -33,9 +31,8 @@
         </div>
     </div>
     
-    
     <h3 class=""> Daily Earnings</h3>
-    <table class="table table-striped">
+    <table id="dailyEarningsTable" class="display nowrap" style="width:100%">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Day</th>
@@ -45,22 +42,35 @@
                 <th scope="col">Hours</th>
                 <th scope="col">Earnings</th>
             </tr>
-
         </thead>
         <tbody>
-            @foreach ($hours  as $hour )
+            @foreach ($hours as $hour)
             <tr>
                 <td>{{ \Carbon\Carbon::parse($hour->date)->format('l') }}</td>
-                <td>{{ $hour->date}}</td>
-                <td>{{ $hour->start_time}}</td>
-                <td>{{ $hour->end_time}}</td>
-                <td>{{ number_format($hour->hours,2)}}</td>
-                <td> Ksh. {{ number_format($hour->earnings, 0)}}</td>
+                <td>{{ $hour->date }}</td>
+                <td>{{ $hour->start_time }}</td>
+                <td>{{ $hour->end_time }}</td>
+                <td>{{ number_format($hour->hours, 2) }}</td>
+                <td>Ksh. {{ number_format($hour->earnings, 0) }}</td>
             </tr>
-                
             @endforeach
         </tbody>
     </table>
 
-    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#monthlyEarningsTable').DataTable({
+                "scrollX": true
+            });
+            $('#dailyEarningsTable').DataTable({
+                "scrollX": true
+            });
+        });
+    </script>
 @endsection

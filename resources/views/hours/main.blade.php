@@ -61,7 +61,7 @@
     </div>
 
     <h2>Entries</h2>
-    <table class="table table-bordered">
+    <table id="example" class="display nowrap" style="width:100%">
         <thead class="thead-dark">
             <tr>
                 <th>Day</th>
@@ -110,6 +110,11 @@
             // Disable past dates before the start of the project
             const startOfProject = '2024-01-01'; // Change to your project start date
             dateInput.setAttribute('min', startOfProject);
+        });
+    </script>
+    <script>
+        new DataTable('#example', {
+        scrollX: true
         });
     </script>
 @endsection
