@@ -61,7 +61,7 @@
                 const dayOfWeek = selectedDate.getUTCDay();
 
                 // Check if selected date is a weekend
-                if (dayOfWeek === 6 || dayOfWeek === 0) { // 6 = Saturday, 0 = Sunday
+                if (dayOfWeek === 6|| dayOfWeek === 0) { // 6 = Saturday, 0 = Sunday
                     alert('Data entry is not allowed on Saturdays and Sundays.');
                     this.value = '';
                 } else if (this.value > today) {
