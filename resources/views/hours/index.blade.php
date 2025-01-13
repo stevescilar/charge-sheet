@@ -4,7 +4,19 @@
 
 @section('content')
     <h1 class="mb-4"> Contract Tracker </h1>
-    <a href="{{ route('hours.create')}}" class="btn btn-primary mb-3">Add New Entry</a>
+
+    <div class="container">
+        <form action="{{ route('hours.closeMonth') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-warning">Close Current Month</button>
+        </form>
+
+        <br>
+        
+        <a href="{{ route('hours.create')}}" class="btn btn-primary mb-3">Add New Entry</a>
+    </div>
+    
+    
 
     <div class="card" style="width: 18rem;">
         <div class="card-header">
@@ -28,6 +40,22 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <form action="{{ route('month.setPeriod') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="start_date">Start Date</label>
+                    <input type="date" name="start_date" id="start_date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="end_date">End Date</label>
+                    <input type="date" name="end_date" id="end_date" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Set Month Period</button>
+            </form>
         </div>
     </div>
     
@@ -56,6 +84,10 @@
             @endforeach
         </tbody>
     </table>
+
+   
+    
+    
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">

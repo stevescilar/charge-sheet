@@ -6,12 +6,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hour;
 use Carbon\Carbon;
+use App\Models\MonthClosure;
 
 class HourController extends Controller
 {
     // dashboard page 
     public function index()
     {
+        $currentPeriod = MonthClosure::where('is_closed', false)->first();
+
+        if ($currentPeriod) {
+            $earnings = Hour::whereBetween('date', [$currentPeriod->start_date, $currentPeriod->end_date])->sum('earnings');
+        }
+
         $hours = Hour::all();
         // $dailyEarnings = round($hours->sum('earnings'),0);
         // group by day and round them 
@@ -26,6 +33,7 @@ class HourController extends Controller
         })->map(function($month){
             return round($month->sum('earnings'),0);
         });
+
 
         return view('hours.index', compact('hours','dailyEarnings','monthlyEarnings'));
 
@@ -56,4 +64,44 @@ class HourController extends Controller
 
     return redirect()->route('hours.index')->with('success', 'Hour added successfully');
     }
+
+    public function setMonthPeriod(Request $request)
+    {
+        $validated = $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+        ]);
+
+        // Check if an overlapping period exists
+        $overlap = MonthClosure::where(function ($query) use ($validated) {
+            $query->whereBetween('start_date', [$validated['start_date'], $validated['end_date']])
+                ->orWhereBetween('end_date', [$validated['start_date'], $validated['end_date']]);
+        })->exists();
+
+        if ($overlap) {
+            return redirect()->back()->withErrors('The period overlaps with an existing month.');
+        }
+
+        MonthClosure::create($validated);
+
+        return redirect()->route('hours.index')->with('success', 'Custom month period set successfully!');
+    }
+
+    public function closeMonth()
+    {
+        $currentPeriod = MonthClosure::where('is_closed', false)->first();
+
+        if (!$currentPeriod) {
+            return redirect()->back()->withErrors('No active month period to close.');
+        }
+
+        Hour::whereBetween('date', [$currentPeriod->start_date, $currentPeriod->end_date])
+            ->update(['month_closure_date' => now(), 'is_closed' => true]);
+
+        $currentPeriod->update(['is_closed' => true]);
+
+        return redirect()->route('hours.index')->with('success', 'Month closed successfully!');
+    }
+
+    
 }

@@ -18,4 +18,8 @@ Route::get('/hours', [HourController::class, 'index'])->name('hours.index');
 Route::get('/hours/create', [HourController::class, 'create'])->name('hours.create');
 Route::post('/hours', [HourController::class, 'store'])->name('hours.store');
 
+
+Route::post('/set-month-period', [HourController::class, 'setMonthPeriod'])->name('month.setPeriod');
+Route::post('/close-month', [HourController::class, 'closeMonth'])->name('hours.closeMonth');
+
 require __DIR__.'/auth.php';
